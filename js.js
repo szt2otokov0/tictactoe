@@ -48,7 +48,7 @@ function mark(space) {
 
     function findSpaceByPosition(posVector){
         let pos = vectorMatrix.indexOf(posVector);
-        return spaceMatrix[pos.y,pos.x]
+        return spaceMatrix[pos.y][pos.x]
     }
 
     function findPosition(y,x){
