@@ -20,13 +20,13 @@ function mark(space) {
     let maxDistance = 0;
     for (i = 0; i < spaceMatrix.length; i++) {
         for (j = 0; j < spaceMatrix[i].length; j++) {
-            if (spaceMatrix[i][j].innerHTML == "") {
+            if (spaceMatrix[i][j] != space) {
                 continue;
             }
-            if (checkPlayer(spaceMatrix[i][j + 1]) || checkPlayer(spaceMatrix[i][j - 1]) ||
-                checkPlayer(spaceMatrix[i + 1][j]) || checkPlayer(spaceMatrix[i - 1][j]) ||
-                checkPlayer(spaceMatrix[i + 1][j + 1]) || checkPlayer(spaceMatrix[i + 1][j - 1]) ||
-                checkPlayer(spaceMatrix[i - 1][j + 1]) || checkPlayer(spaceMatrix[i - 1][j - 1])) {
+            if (checkPlayer(i,j+1) || checkPlayer(i,j-1) ||
+                checkPlayer(i+1,j) || checkPlayer(i-1,j) ||
+                checkPlayer(i+1,j+1) || checkPlayer(i+1,j-1) ||
+                checkPlayer(i-1,j+1) || checkPlayer(i-1,j-1)) {
                 maxDistance++;
             }
             console.log("checking.., max distance so far:" + maxDistance)
@@ -36,10 +36,14 @@ function mark(space) {
         }
     }
 
-    function checkPlayer(spaceToCheck) {
-        if (spaceToCheck === undefined) return false;
-        spaceToCheck.style = "background-color: green"
-        return (spaceToCheck.innerHTML == PlayerChar);
+    function checkPlayer(y, x) {
+        try {
+            let spaceToCheck = spaceMatrix[y][x];
+            spaceToCheck.style = "background-color: green"
+            return (spaceToCheck.innerHTML == PlayerChar);
+        } catch (error) {
+            return false;
+        }
     }
 }
 
